@@ -35,8 +35,10 @@ def display_results(results, n_rolls):
         prob = freq / n_rolls
         print(f"{total:>3} | {freq:>9} | {prob:.3f}")
 
+import os
+
 def plot_histogram(results):
-    """Plot a histogram of dice roll results."""
+    """Plot and save a histogram of dice roll results."""
     sums = list(results.keys())
     frequencies = list(results.values())
 
@@ -45,7 +47,15 @@ def plot_histogram(results):
     plt.ylabel('Frequency')
     plt.title('Dice Roll Simulation Results')
     plt.xticks(sums)
+
+    # Save the figure
+    os.makedirs('results', exist_ok=True)
+    filename = 'results/dice_histogram.png'
+    plt.savefig(filename)
+    print(f"\nHistogram saved as {filename}")
+
     plt.show()
+
 
 def calculate_expected_value(results, n_rolls):
     """Calculate and return the expected value of the dice sum."""
